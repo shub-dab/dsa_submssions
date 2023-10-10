@@ -3,15 +3,19 @@ class Solution {
         int size = nums.length;
         int ans[] = new int[size];
 
-        for(int i=0; i<size; i++) {
-            int count = 0;
-            for(int j=0; j<size; j++) {
-                if(nums[j] < nums[i]) {
-                    count++;
-                }
-            }
+        int freq[] = new int[101];
+        int count[] = new int[101];
 
-            ans[i] = count;
+        for(int i=0; i<size; i++) {
+            freq[nums[i]]++;
+        }
+
+        for(int i=1; i<count.length; i++) {
+            count[i] = count[i-1] + freq[i-1];
+        }
+
+        for(int i=0; i<size; i++) {
+            ans[i] = count[nums[i]];
         }
 
         return ans;
